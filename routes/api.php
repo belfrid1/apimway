@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,7 +22,17 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+
+Route::middleware('auth:sanctum')->group( function () {
+    Route::resource('products', ProductController::class);
+});
+
+// get all users 
+Route::get('/users',[\App\v1\User\Http\Controllers\UserController::class, 'getAllUsers']);
+
+
+Route::get('/user', function (Request $request) {
+    dd('ok');
     return $request->user();
 });
 
@@ -29,9 +40,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest')
                 ->name('register');
 
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-                ->middleware('guest')
-                ->name('login');
+
 
 Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
                 ->middleware('guest')

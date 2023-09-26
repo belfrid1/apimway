@@ -15,11 +15,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): Response
     {
-        $request->authenticate();
-
+        
+            dd('ok s');
+        $response = $request->authenticate();
         //$request->session()->regenerate();
+        
 
-        return response()->noContent(200);
+        return response()->noContent();
+    
     }
 
     /**

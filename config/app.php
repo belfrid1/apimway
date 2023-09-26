@@ -170,6 +170,10 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        \App\v1\User\UserServiceProvider::class,
+
     ])->toArray(),
 
     /*
